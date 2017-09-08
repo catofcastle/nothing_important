@@ -15,7 +15,7 @@ class MySqlSource implements DatabaseInterface
         $this->handler = $connection->getHandler();
     }
 
-    public function select(string $tableName, array $fieldsTable)
+    public function select(string $tableName = null, array $fieldsTable = null)
     {
         $fields = implode(',', $fieldsTable);
 
@@ -29,7 +29,7 @@ class MySqlSource implements DatabaseInterface
         return $data;
     }
 
-    public function insert(string $tableName, array $fieldsTable, array $values)
+    public function insert(string $tableName = null, array $fieldsTable = null, array $values = null)
     {
         $fields = implode(',', $fieldsTable);
         $placeholders = array_map(function($value) {
@@ -57,7 +57,7 @@ class MySqlSource implements DatabaseInterface
         
     }
 
-    public function delete(string $tableName, array $bind)
+    public function delete(string $tableName = null, array $bind = null)
     {
         $field = $bind['field'];
         $value = $bind['value'];

@@ -33,22 +33,22 @@ class DatabaseConfiguration
         $this->options = $options;
     }
 
-    public function getDsn(): string
+    public function getDsn()
     {
         return $this->dsn;
     }
 
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->username;
     }
 
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function getOptions(): array
+    public function getOptions()
     {
         return $this->options;
     }

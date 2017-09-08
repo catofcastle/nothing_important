@@ -27,9 +27,9 @@ class DatabaseConnection
     public function getHandler(): PDO
     {
         return new PDO(
-            $this->configuration->getDsn(), 
-            $this->configuration->getPassword(),
+            $this->configuration->getDsn(),
             $this->configuration->getUsername(),
+            $this->configuration->getPassword(),          
             $this->configuration->getOptions()
             );
     }
