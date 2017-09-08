@@ -9,7 +9,6 @@ class DatabaseConfiguration
      */
     private $dsn;
 
-    
     /**
      * @var string
      */

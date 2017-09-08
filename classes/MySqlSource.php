@@ -53,15 +53,20 @@ class MySqlSource implements DatabaseInterface
 
     public function update()
     {
-        
-        
+        $sql = "UPDATE $table1, $table2 SET $table1.plus = false WHERE $table1.fid_news = $table2.id_news AND $table1.user = :user;";
+        $sth = $this->db->prepare($sql);
+        $sth->bindValue(':user', $username);
+
+        if (!$sth->execute()) {
+            throw new PDOException($sth->errorCode());
+        }
     }
 
     public function delete(string $tableName = null, array $bind = null)
     {
         $field = $bind['field'];
         $value = $bind['value'];
-        
+
         $sql = "DELETE FROM $tableName WHERE $field = :$field";
         $sth = $this->db->prepare($sql);
         $sth->bindValue(":$field", $value);
