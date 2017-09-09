@@ -15,12 +15,11 @@ class MySqlSource implements DatabaseInterface
         $this->handler = $connection->getHandler();
     }
 
-    public function select(string $tableName = null, array $fieldsTable = null)
+    public function select(int $fid)
     {
-        $fields = implode(',', $fieldsTable);
-
-        $sql = "SELECT $fields FROM $tableName";
+        $sql = "SELECT name FROM category WHERE parent_id = :parent_id";
         $sth = $this->handler->query($sql);
+        $sth->bindValue(':parent_id', $fid);
         $data = $sth->fetchAll();
 
         if (!$data) {
@@ -29,47 +28,35 @@ class MySqlSource implements DatabaseInterface
         return $data;
     }
 
-    public function insert(string $tableName = null, array $fieldsTable = null, array $values = null)
+    public function insert(string $name, int $fid)
     {
-        $fields = implode(',', $fieldsTable);
-        $placeholders = array_map(function($value) {
-            return ':' . $value;
-        }, $fieldsTable);
-
-        $placeholder = implode(',', $placeholders);
-        $combine = array_combine($placeholders, $values);
-
-        $sql = "INSERT INTO $tableName ($fields) VALUES ($placeholder)";
+        $sql = "INSERT INTO category (name, parent_id) VALUES (name = :name, parent_id = :parent_id)";
         $sth = $this->handler->prepare($sql);
-
-        foreach ($combine as $key => $value) {
-            $sth->bindValue($key, $value);
+        $sth->bindValue(':name', $name);
+        $sth->bindValue(':parent_id', $fid);
+        
+        if (!$sth->execute()) {
+            throw new PDOException($sth->errorCode());
         }
+    }
+
+    public function update(string $name, int $id)
+    {
+        $sql = "UPDATE category SET name = :name WHERE id = :id";
+        $sth = $this->db->prepare($sql);
+        $sth->bindValue(':name', $name);
+        $sth->bindValue(':id', $id);
 
         if (!$sth->execute()) {
             throw new PDOException($sth->errorCode());
         }
     }
 
-    public function update()
+    public function delete(int $id)
     {
-        $sql = "UPDATE $table1, $table2 SET $table1.plus = false WHERE $table1.fid_news = $table2.id_news AND $table1.user = :user;";
+        $sql = "DELETE FROM category WHERE id = :id";
         $sth = $this->db->prepare($sql);
-        $sth->bindValue(':user', $username);
-
-        if (!$sth->execute()) {
-            throw new PDOException($sth->errorCode());
-        }
-    }
-
-    public function delete(string $tableName = null, array $bind = null)
-    {
-        $field = $bind['field'];
-        $value = $bind['value'];
-
-        $sql = "DELETE FROM $tableName WHERE $field = :$field";
-        $sth = $this->db->prepare($sql);
-        $sth->bindValue(":$field", $value);
+        $sth->bindValue(':id', $id);
 
         if (!$sth->execute()) {
             throw new PDOException($sth->errorCode());

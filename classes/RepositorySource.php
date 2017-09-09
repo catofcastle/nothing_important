@@ -18,7 +18,7 @@ class RepositorySource
         
     }
 
-    public function addCategory(string $category, string $fid = null)
+    public function addCategory(int $fid)
     {
         $this->source->insert('category', ['category', 'fid_category'], [$category, $fid]);
     }

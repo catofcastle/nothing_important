@@ -4,11 +4,11 @@ namespace classes;
 interface DatabaseInterface
 {
 
-    public function select();
+    public function select(int $fid);
 
-    public function insert();
+    public function insert(string $name, int $fid);
 
-    public function update();
+    public function update(string $name, int $id);
 
-    public function delete();
+    public function delete(int $id);
 }
