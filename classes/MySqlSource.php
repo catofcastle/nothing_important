@@ -28,9 +28,9 @@ class MySqlSource implements DatabaseInterface
         return $data;
     }
 
-    public function insert(string $name, int $fid)
+    public function insert(string $name, int $fid = null)
     {
-        $sql = "INSERT INTO category (name, parent_id) VALUES (name = :name, parent_id = :parent_id)";
+        $sql = "INSERT INTO category (name, parent_id) VALUES (:name, :parent_id)";
         $sth = $this->handler->prepare($sql);
         $sth->bindValue(':name', $name);
         $sth->bindValue(':parent_id', $fid);
