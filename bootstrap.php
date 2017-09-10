@@ -10,3 +10,4 @@ $configuration = new DatabaseConfiguration(
 );
 
 $connection = new DatabaseConnection($configuration);
+var_dump($connection); die();
