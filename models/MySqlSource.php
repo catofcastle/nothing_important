@@ -1,8 +1,8 @@
 <?php
-namespace classes;
+namespace models;
 
-use classes\DatabaseInterface;
-use classes\DatabaseConnection;
+use components\DatabaseInterface;
+use components\DatabaseConnection;
 use PDOException;
 
 class MySqlSource implements DatabaseInterface

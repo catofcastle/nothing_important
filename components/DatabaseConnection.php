@@ -1,7 +1,7 @@
 <?php
 namespace components;
 
-use classes\DatabaseConfiguration;
+use components\DatabaseConfiguration;
 use PDO;
 
 class DatabaseConnection

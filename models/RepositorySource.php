@@ -1,7 +1,7 @@
 <?php
-namespace classes;
+namespace models;
 
-use classes\DatabaseInterface;
+use components\DatabaseInterface;
 
 class RepositorySource
 {
