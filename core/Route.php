@@ -12,11 +12,11 @@ class Route
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
         if (!empty($routes[1])) {
-            $controllerName = $routes[1];
+            $controllerName = ucfirst($routes[1]);
         }
 
         if (!empty($routes[2])) {
-            $actionName = $routes[2];
+            $actionName = ucfirst($routes[2]);
         }
         
         $controllerName = $controllerName . 'Controller';
