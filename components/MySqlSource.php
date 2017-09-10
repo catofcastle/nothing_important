@@ -1,5 +1,5 @@
 <?php
-namespace models;
+namespace components;
 
 use components\DatabaseInterface;
 use components\DatabaseConnection;
