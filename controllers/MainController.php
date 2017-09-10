@@ -1,4 +1,5 @@
 <?php
+namespace controllers;
 
 use components\DatabaseConfiguration;
 use components\DatabaseConnection;
@@ -18,5 +19,10 @@ class MainController
 
         $connection = new DatabaseConnection($configuration);
         $source = new MySqlSource($connection);
+        $repository = new RepositorySource();
+        $repository->setSource($source);
+        
+        $data = $repository->selectAllCategory();
+        var_dump($data);
     }
 }

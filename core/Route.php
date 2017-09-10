@@ -1,4 +1,5 @@
 <?php
+namespace core;
 
 class Route
 {
@@ -17,18 +18,19 @@ class Route
         if (!empty($routes[2])) {
             $actionName = $routes[2];
         }
-
-        $controllerName = 'Controller' . $controllerName;
+        
+        $controllerName = $controllerName . 'Controller';
         $actionName = 'action' . $actionName;
 
         $controllerFile = $controllerName . '.php';
-        $controllerPath = "../controllers/" . $controllerFile;
-
+        $controllerPath = 'controllers/' . $controllerFile;
+        
         if (!file_exists($controllerPath)) {
             Route::ErrorPage404();
         }
-
-        $controller = new $controllerName;
+        
+        $controller = "\\controllers\\$controllerName";
+        $controller = new $controller();
         $action = $actionName;
 
         if (method_exists($controller, $action)) {
