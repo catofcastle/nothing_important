@@ -1,5 +1,5 @@
 <?php
-namespace components;
+namespace models;
 
 use components\DatabaseInterface;
 use components\DatabaseConnection;
@@ -10,7 +10,7 @@ class MySqlSource implements DatabaseInterface
 
     private $handler;
 
-    public function __construct(DatabaseConnection &$connection)
+    public function __construct(DatabaseConnection $connection)
     {
         $this->handler = $connection->getHandler();
     }

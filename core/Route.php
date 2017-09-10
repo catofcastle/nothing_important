@@ -6,7 +6,7 @@ class Route
     public static function run()
     {
         $controllerName = 'Main';
-        $actionName = 'Index';
+        $actionName = 'Run';
 
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
