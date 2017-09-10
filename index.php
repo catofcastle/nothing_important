@@ -1,9 +1,9 @@
 <?php
 
-use classes\DatabaseConfiguration;
-use classes\DatabaseConnection;
-use classes\MySqlSource;
-use classes\RepositorySource;
+use components\DatabaseConfiguration;
+use components\DatabaseConnection;
+use components\MySqlSource;
+use models\RepositorySource;
 
 require_once 'autoload.php';
 
@@ -19,8 +19,3 @@ $configuration = new DatabaseConfiguration(
 
 $connection = new DatabaseConnection($configuration);
 $source = new MySqlSource($connection);
-$repository = new RepositorySource();
-
-$repository->setSource($source);
-$data = $repository->selectAllCategory();
-

@@ -33,3 +33,14 @@ function loadFromCore($coreName)
     }
     return false;
 }
+
+function loadFromModels($modelName)
+{
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $modelName);
+    $file = ROOT_PATH . $path . '.php';
+    if (file_exists($file)) {
+        require_once $file;
+        return true;
+    }
+    return false;
+}
