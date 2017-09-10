@@ -10,24 +10,17 @@ class DatabaseConnection
     private static
         $instance = null;
 
-    public function getHandler(): PDO
-    {
-        return new PDO(
-            $this->configuration->getDsn(), $this->configuration->getUsername(), $this->configuration->getPassword(), $this->configuration->getOptions()
-        );
-    }
-
     /**
      * @return Singleton
      */
-    public static function getInstance(DatabaseConfiguration $configuration)
+    public static function getInstance(DatabaseConfiguration $configuration) : PDO
     {
         if (null === self::$instance) {
             self::$instance = new PDO(
-                $this->configuration->getDsn(), 
-                $this->configuration->getUsername(), 
-                $this->configuration->getPassword(), 
-                $this->configuration->getOptions()
+                $configuration->getDsn(), 
+                $configuration->getUsername(), 
+                $configuration->getPassword(), 
+                $configuration->getOptions()
             );
         }
         return self::$instance;

@@ -9,5 +9,4 @@ $configuration = new DatabaseConfiguration(
     'henrietta'
 );
 
-$connection = new DatabaseConnection($configuration);
-var_dump($connection); die();
+$connection = DatabaseConnection::getInstance($configuration);
