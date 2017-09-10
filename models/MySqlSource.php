@@ -15,11 +15,10 @@ class MySqlSource implements DatabaseInterface
         $this->handler = $connection->getHandler();
     }
 
-    public function select(int $fid)
+    public function select()
     {
-        $sql = "SELECT name FROM category WHERE parent_id = :parent_id";
+        $sql = "SELECT id, name, parent_id FROM category";
         $sth = $this->handler->query($sql);
-        $sth->bindValue(':parent_id', $fid);
         $data = $sth->fetchAll();
 
         if (!$data) {

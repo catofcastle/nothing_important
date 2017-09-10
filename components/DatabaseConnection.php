@@ -1,5 +1,5 @@
 <?php
-namespace classes;
+namespace components;
 
 use classes\DatabaseConfiguration;
 use PDO;

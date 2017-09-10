@@ -1,10 +1,10 @@
 <?php
-namespace classes;
+namespace components;
 
 interface DatabaseInterface
 {
 
-    public function select(int $fid);
+    public function select();
 
     public function insert(string $name, int $fid);
 

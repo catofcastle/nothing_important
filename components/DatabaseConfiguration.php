@@ -1,5 +1,5 @@
 <?php
-namespace classes;
+namespace components;
 
 class DatabaseConfiguration
 {
