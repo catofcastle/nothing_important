@@ -27,13 +27,23 @@ class MySqlSource implements DatabaseInterface
         return $data;
     }
 
-    public function insert(string $name, int $fid = null)
+    public function insert(string $table, array $fieldsTable, array $values)
     {
-        $sql = "INSERT INTO category (name, parent_id) VALUES (:name, :parent_id)";
-        $sth = $this->handler->prepare($sql);
-        $sth->bindValue(':name', $name);
-        $sth->bindValue(':parent_id', $fid);
-        
+        $fields = implode(',', $fieldsTable);
+        $placeholders = array_map(function($value) {
+            return ':' . $value;
+        }, $fieldsTable);
+
+        $placeholder = implode(',', $placeholders);
+        $combine = array_combine($placeholders, $values);
+
+        $sql = "INSERT INTO $table ($fields) VALUES ($placeholder)";
+        $sth = $this->db->prepare($sql);
+
+        foreach ($combine as $key => $value) {
+            $sth->bindValue($key, $value);
+        }
+
         if (!$sth->execute()) {
             throw new PDOException($sth->errorCode());
         }

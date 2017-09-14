@@ -10,6 +10,4 @@ spl_autoload_register('loadFromCore');
 
 require_once 'bootstrap.php';
 
-
-
 Route::run();
