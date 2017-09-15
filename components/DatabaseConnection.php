@@ -13,7 +13,7 @@ class DatabaseConnection
     /**
      * @return Singleton
      */
-    public static function getInstance(DatabaseConfiguration $configuration) : PDO
+    public static function initialize(DatabaseConfiguration $configuration)
     {
         if (null === self::$instance) {
             self::$instance = new PDO(
@@ -23,6 +23,10 @@ class DatabaseConnection
                 $configuration->getOptions()
             );
         }
+    }
+
+    public static function getInstance()
+    {
         return self::$instance;
     }
 

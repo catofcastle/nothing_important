@@ -1,21 +1,28 @@
 <?php
 namespace controllers;
 
-use models\MySqlSource;
-use models\RepositorySource;
+use core\Controller;
+use core\MySql;
 
-class MainController
+class MainController extends Controller
 {
 
     public function actionRun()
     {
+        $query = (new MySql())
+            ->select(['id', 'name'])
+            ->from('category', 'CTG')
+            ->where('CTG.name = Rose');
 
-        $source = new MySqlSource($connection);
-        $repository = new RepositorySource();
-        $repository->setSource($source);
-
-        $data = $repository->selectAllCategory();
-        var_dump($data);
+        echo '<pre>';
+        var_dump($query);
+        echo '</pre>';
+        
+        $query = (array) $query;
+        
+        foreach ($query as $value) {
+            echo $value;
+        }
     }
 
     public function actionTest()
