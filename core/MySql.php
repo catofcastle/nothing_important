@@ -1,10 +1,14 @@
 <?php
 namespace core;
 
-class MySql
+use PDO;
+use core\Model;
+
+class MySql extends Model
 {
 
     private $sql = [];
+
     /**
      * @var array
      */
@@ -23,7 +27,7 @@ class MySql
     public function add(string $sqlPart)
     {
         $this->sql[] = $sqlPart;
-        
+
         return $this;
     }
 
@@ -55,12 +59,14 @@ class MySql
         return $this->add($this->where);
     }
 
-    public function __toString()
+    public function execute()
     {
         foreach ($this->sql as $sqlPart) {
             $sql .= $sqlPart;
         }
         
-        return $sql;
+        $sth = $this->handlerDb->query($sql);
+        
+        return $sth->fetch(PDO::FETCH_ASSOC);
     }
 }

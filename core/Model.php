@@ -8,8 +8,8 @@ class Model
 
     protected $handlerDb;
 
-    public function __construct(DatabaseConnection $connection)
+    public function __construct()
     {
-        $this->handlerDb = $connection::getInstance();
+        $this->handlerDb = DatabaseConnection::getInstance();
     }
 }

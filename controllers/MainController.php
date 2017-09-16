@@ -12,10 +12,12 @@ class MainController extends Controller
         $query = (new MySql())
             ->select(['id', 'name'])
             ->from('category', 'CTG')
-            ->where('CTG.name = Rose');
+            ->where("CTG.name = 'Rose'")
+            ->execute();
         
-        echo (string)$query;
-        
+        echo '<pre>';
+        var_dump($query);
+        echo '<\pre>';
     }
 
     public function actionTest()

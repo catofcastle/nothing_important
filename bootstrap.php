@@ -9,4 +9,4 @@ $configuration = new DatabaseConfiguration(
     ''
 );
 
-$connection = DatabaseConnection::getInstance($configuration);
+$connection = DatabaseConnection::initialize($configuration);
