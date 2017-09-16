@@ -13,16 +13,9 @@ class MainController extends Controller
             ->select(['id', 'name'])
             ->from('category', 'CTG')
             ->where('CTG.name = Rose');
-
-        echo '<pre>';
-        var_dump($query);
-        echo '</pre>';
         
-        $query = (array) $query;
+        echo (string)$query;
         
-        foreach ($query as $value) {
-            echo $value;
-        }
     }
 
     public function actionTest()

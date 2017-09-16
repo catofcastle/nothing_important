@@ -4,6 +4,7 @@ namespace core;
 class MySql
 {
 
+    private $sql = [];
     /**
      * @var array
      */
@@ -19,11 +20,18 @@ class MySql
      */
     private $where;
 
+    public function add(string $sqlPart)
+    {
+        $this->sql[] = $sqlPart;
+        
+        return $this;
+    }
+
     public function select(array $fields): MySql
     {
         $this->fields = 'SELECT ' . implode(',', $fields);
 
-        return $this;
+        return $this->add($this->fields);
     }
 
     public function insert(array $fields): MySql
@@ -37,18 +45,22 @@ class MySql
     {
         $this->from = ' FROM ' . $table . ' AS ' . $alias;
 
-        return $this;
+        return $this->add($this->from);
     }
 
     public function where(string $condition): MySql
     {
         $this->where = ' WHERE ' . $condition;
 
-        return $this;
+        return $this->add($this->where);
     }
 
     public function __toString()
     {
+        foreach ($this->sql as $sqlPart) {
+            $sql .= $sqlPart;
+        }
         
+        return $sql;
     }
 }
